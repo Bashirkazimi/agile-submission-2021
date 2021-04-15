@@ -44,3 +44,5 @@ python3 predict_sliding.py --output_shp_file=vector.shp --input_dtm=test_dtm.tif
 It runs the trained model on the `test_dtm.tif` raster file and saves the predictions into `vector.shp` vector file in the corresponding `files` folder.
 
 The above commands are run using the default arguments/parameters. Further details of parameters for training, validation and testing experiments are including in the `config.py` file for each experiment. 
+
+Training history and evaluation results on the test set are already included csv files in the `files` folder for each experiment in case you do not want to or do not have the resources to run the above commands. Vector files for predictions on the large region are also included. 
