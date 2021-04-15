@@ -10,7 +10,8 @@ This repository accompanies our AGILE 2021 paper submission. Deep learning model
 
 *   Download the test data from this [link](https://seafile.cloud.uni-hannover.de/d/95a74b9a5b0e4e639077/). Extract and copy it to the root of this repo. 
 
-*   Create test examples from the large DTM and its corresponding label that you downloaded: `python3 create_dataset.py`
+*   Create test examples from the large DTM and its corresponding label that you downloaded: 
+    *   `python3 create_dataset.py`
 *   Evaluate binary segmentation with HRNet:
 
     *   `cd HRNetBinarySegmentation`
