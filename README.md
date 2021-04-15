@@ -41,4 +41,6 @@ The trained models can be used to scan large DTMs in a sliding window fashion ma
 python3 predict_sliding.py --output_shp_file=vector.shp --input_dtm=test_dtm.tif
 ```
 
-It runs the trained model on the `test_dtm.tif` raster file and saves the predictions into `vector.shp` vector file.
+It runs the trained model on the `test_dtm.tif` raster file and saves the predictions into `vector.shp` vector file in the corresponding `files` folder.
+
+The above commands are run using the default arguments/parameters. Further details of parameters for training, validation and testing experiments are including in the `config.py` file for each experiment. 
