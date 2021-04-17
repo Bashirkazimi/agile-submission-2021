@@ -5,7 +5,19 @@ This repository accompanies our AGILE 2021 paper submission titled "Extraction o
 
 
 *   Clone this repository and navigate to it on your computer.
-*   Install required libraries using:
+*   This code has been tested using `python 3.5.2`, so make sure you are using this version.
+*   It highly depends on the `GDAL` library working with raster and vector data. Its installation is problematic with `pip`, but it can be installed as follows:
+    * `add-apt-repository ppa:ubuntugis/ppa`
+    * `apt-get update`
+    * `apt-get install gdal-bin -y`
+    * `ogrinfo --version`
+    * You will have to install the version printed after the above command
+    * `apt-get install libgdal-dev -y`
+    * `export CPLUS_INCLUDE_PATH=/usr/include/gdal`
+    * `export C_INCLUDE_PATH=/usr/include/gdal`
+    * `python3 -m pip install GDAL==2.2.2` Replace 2.2.2 with whatever version was printed by the `ogrinfo --version` command above
+    
+*   Install other required libraries using:
     `pip install -r requirements.txt`
 
 *   Download the test data from this [link](https://seafile.cloud.uni-hannover.de/d/95a74b9a5b0e4e639077/). Extract and copy it to the root of this repo. 
