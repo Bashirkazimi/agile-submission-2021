@@ -9,11 +9,11 @@ if __name__ == "__main__":
 	parser = argparse.ArgumentParser(
 		description='Create datasets for trainin, testing and validation!')
 	parser.add_argument('--input_tif', required=False,
-						default='data/dtms/validation_dtm.tif',
+						default='data/dtms/test_dtm.tif',
 						metavar="Large input file to crop training/testing/validation patches from",
 						help="Large input file to crop training/testing/validation patches from")
 	parser.add_argument('--label_tif', required=False,
-						default='data/labels/validation_labels.tif',
+						default='data/labels/test_labels.tif',
 						metavar="Corresponding large label file to crop training/testing/validation patches from",
 						help="Corresponding large label file to crop training/testing/validation patches from")
 	parser.add_argument('--data_dir', required=False,
@@ -21,7 +21,7 @@ if __name__ == "__main__":
 						metavar="directory to save the training/test/validation data",
 						help="directory to save the training/test/validation data")
 	parser.add_argument('--split', required=False,
-						default='valid',
+						default='test',
 						metavar="is it training (train), testing (test) or validation (valid)",
 						help="is it training (train), testing (test) or validation (valid)")
 	parser.add_argument('--dim', required=False,

@@ -282,6 +282,59 @@ def make_predictions_binary(model, tif_file, dim, output_shp_file, field_name='l
 	merge_shp_files_from_memory(list_of_shps, output_shp_file)
 
 
+def make_predictions_multiclass(model, tif_file, dim, output_shp_file, field_name='label', batch_size=32, step=None):
+    if step is None:
+        step = dim
+    list_of_tiles = []
+    list_of_arrays = []
+    list_of_shps = []
+    
+    ds = gdal.Open(tif_file, gdalconst.GA_ReadOnly)
+    xs = ds.RasterXSize
+    ys = ds.RasterYSize
+
+    batch_counter = 0
+
+    print('Reading and making predictions!')
+    for i in range(0, xs, step):
+        for j in range(0, ys, step):
+            current_window = gdal.Translate('', tif_file, srcWin=[i, j, dim, dim], format='MEM')#srcWin=[dim*i, dim*j, dim, dim], format='MEM')
+            list_of_tiles.append(current_window)
+            cur_array = normalize_raster_locally(current_window.ReadAsArray())
+            list_of_arrays.append(cur_array)
+            batch_counter += 1
+            if batch_counter == batch_size:
+                print(batch_counter, len(list_of_arrays), len(list_of_tiles), len(list_of_shps))
+                inputs = np.array(list_of_arrays)
+                inputs = np.expand_dims(inputs, -1)
+                predictions = model.predict(inputs, batch_size=batch_size)
+                predictions = np.argmax(predictions, -1)
+                for example in range(batch_size):
+                    cur_pred = predictions[example]
+                    original_data = list_of_tiles[example]
+                    cur_shp = mask_to_polygon_in_memory(original_data, cur_pred, field_name=field_name)
+                    list_of_shps.append(cur_shp)
+
+                list_of_tiles = []
+                list_of_arrays = []
+
+                batch_counter = 0
+    
+    if batch_counter:
+        print('\n\n batch counter: {}\n\n'.format(batch_counter))
+        print(batch_counter, len(list_of_arrays), len(list_of_tiles), len(list_of_shps))
+        predictions = model.predict(np.expand_dims(np.array(list_of_arrays), -1))
+        predictions = np.argmax(predictions, -1)
+        for example in range(predictions.shape[0]):
+            cur_pred = predictions[example]
+            original_data = list_of_tiles[example]
+            cur_shp = mask_to_polygon_in_memory(original_data, cur_pred, field_name=field_name)
+            list_of_shps.append(cur_shp)
+
+    print('merging shp data!')
+    merge_shp_files_from_memory(list_of_shps, output_shp_file)	
+
+
 
 def sparse_iou(y_true, y_pred, label: int):
     """

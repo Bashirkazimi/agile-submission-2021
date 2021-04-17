@@ -98,5 +98,5 @@ if __name__ == "__main__":
 	model.compile(loss='binary_crossentropy', optimizer=opt, metrics=metrics)
 
 	output_shp_file = 'files/{}'.format(conf.output_shp_file)
-	utils.make_predictions_binary(model, conf.input_dtm, conf.dim, output_shp_file)
+	utils.make_predictions_multiclass(model, conf.input_dtm, conf.dim, output_shp_file)
 	# utils.make_predictions_and_vectorize(model, test_gen, output_shp_file) 
