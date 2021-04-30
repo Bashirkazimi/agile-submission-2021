@@ -1,5 +1,10 @@
 # Extraction of linear structures from digital terrain models using deep learning
 
+
+[![DOI](https://zenodo.org/badge/358210087.svg)](https://zenodo.org/badge/latestdoi/358210087)
+
+
+
 This repository accompanies our AGILE 2021 paper submission titled "Extraction of linear structures from digital terrain models using deep learning". Deep learning models including HRNet and SegNet are used for segmentation of linear structures in Digital Terrain Models (DTMs). The training and validation dataset is private to Lower Saxony State Office for Heritage. However, the trained models and the test dataset to which the reported results correspond to are included here. Results can be reproduced using the following steps.
 
 
